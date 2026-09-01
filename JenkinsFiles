@@ -19,13 +19,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'python -m pytest'
+                bat 'python -m pytest --junitxml=results.xml'
             }
         }
     }
 
     post {
         always {
+            junit 'results.xml'
             echo 'Pipeline Finished'
         }
 
